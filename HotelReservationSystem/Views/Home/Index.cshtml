@@ -1,0 +1,41 @@
+@model IEnumerable<HotelClass>
+@{
+    ViewData["Title"] = "Hotel Classes";
+}
+
+<h1>Find Your Ideal Stay</h1>
+<p>Browse our hotel classes, compare amenities, and reserve in minutes.</p>
+
+<section>
+    <h2>Current Offers</h2>
+    <ul>
+        @foreach (var offer in (string[])ViewBag.Offers)
+        {
+            <li>@offer</li>
+        }
+    </ul>
+</section>
+
+<section>
+    <h2>Available Services</h2>
+    <ul>
+        @foreach (var service in (string[])ViewBag.Services)
+        {
+            <li>@service</li>
+        }
+    </ul>
+</section>
+
+<section class="grid">
+    @foreach (var hotelClass in Model)
+    {
+        <article class="card">
+            <h3>@hotelClass.Name</h3>
+            <p>@hotelClass.Description</p>
+            <p><strong>Price/Night:</strong> @hotelClass.BasePricePerNight.ToString("C")</p>
+            <p><strong>Capacity:</strong> @hotelClass.Capacity guests</p>
+            <p><strong>Amenities:</strong> @hotelClass.Amenities</p>
+            <a class="btn" asp-controller="Reservations" asp-action="Create" asp-route-hotelClassId="@hotelClass.Id">Reserve Now</a>
+        </article>
+    }
+</section>

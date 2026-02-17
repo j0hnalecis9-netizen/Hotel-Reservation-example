@@ -1,0 +1,45 @@
+@model IEnumerable<Reservation>
+@{
+    ViewData["Title"] = "Reservation Management";
+}
+
+<h1>Reservation Management</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Customer</th>
+        <th>Room</th>
+        <th>Dates</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.User?.FullName</td>
+            <td>@item.Room?.RoomNumber</td>
+            <td>@item.CheckInDate:yyyy-MM-dd / @item.CheckOutDate:yyyy-MM-dd</td>
+            <td>@item.Status</td>
+            <td>@item.TotalAmount.ToString("C")</td>
+            <td>
+                <form asp-action="UpdateStatus" method="post" style="display:inline-block;">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <select name="status" asp-items="Html.GetEnumSelectList<ReservationStatus>()"></select>
+                    <button type="submit">Update</button>
+                </form>
+
+                <form asp-action="Delete" method="post" style="display:inline-block; margin-left: 8px;">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit" class="danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

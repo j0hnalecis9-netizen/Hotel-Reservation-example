@@ -1,0 +1,76 @@
+@model ReservationCreateViewModel
+@{
+    ViewData["Title"] = "Create Reservation";
+}
+
+<h1>Reservation Details</h1>
+
+<form asp-action="Create" method="post">
+    <input type="hidden" asp-for="SelectedHotelClassId" />
+
+    <div class="form-row">
+        <label asp-for="SelectedRoomId"></label>
+        <select asp-for="SelectedRoomId" asp-items="Model.RoomOptions">
+            <option value="">-- Select a room --</option>
+        </select>
+        <span asp-validation-for="SelectedRoomId" class="error"></span>
+    </div>
+
+    <div class="form-row">
+        <label asp-for="FullName"></label>
+        <input asp-for="FullName" />
+        <span asp-validation-for="FullName" class="error"></span>
+    </div>
+
+    <div class="form-row">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email" class="error"></span>
+    </div>
+
+    <div class="form-row">
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber" class="error"></span>
+    </div>
+
+    <div class="form-row">
+        <label asp-for="CheckInDate"></label>
+        <input asp-for="CheckInDate" type="date" />
+        <span asp-validation-for="CheckInDate" class="error"></span>
+    </div>
+
+    <div class="form-row">
+        <label asp-for="CheckOutDate"></label>
+        <input asp-for="CheckOutDate" type="date" />
+        <span asp-validation-for="CheckOutDate" class="error"></span>
+    </div>
+
+    <div class="form-row">
+        <label>Add-ons</label>
+        @foreach (var addOn in Model.AvailableAddOns)
+        {
+            <div>
+                <input type="checkbox" name="SelectedAddOnIds" value="@addOn.Id" @(Model.SelectedAddOnIds.Contains(addOn.Id) ? "checked" : "") />
+                @addOn.Name (@addOn.Price.ToString("C")) - @addOn.Description
+            </div>
+        }
+    </div>
+
+    <div class="form-row">
+        <label asp-for="PaymentMethod"></label>
+        <select asp-for="PaymentMethod" asp-items="Model.PaymentOptions"></select>
+        <span asp-validation-for="PaymentMethod" class="error"></span>
+    </div>
+
+    <div class="form-row">
+        <label><input asp-for="SendReceiptByEmail" /> Send receipt via email</label>
+        <label><input asp-for="PrintReceipt" /> Print receipt</label>
+    </div>
+
+    <button class="btn" type="submit">Confirm Reservation</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

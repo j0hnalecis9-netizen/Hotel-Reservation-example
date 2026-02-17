@@ -1,0 +1,27 @@
+@model Reservation
+@{
+    ViewData["Title"] = "Reservation Receipt";
+}
+
+<h1>Reservation Receipt</h1>
+<p><strong>Booking #:</strong> @Model.Id</p>
+<p><strong>Guest:</strong> @Model.User?.FullName (@Model.User?.Email)</p>
+<p><strong>Room:</strong> @Model.Room?.RoomNumber - @Model.Room?.HotelClass?.Name</p>
+<p><strong>Stay:</strong> @Model.CheckInDate:yyyy-MM-dd to @Model.CheckOutDate:yyyy-MM-dd</p>
+<p><strong>Payment Method:</strong> @Model.Payment?.Method</p>
+<p><strong>Total:</strong> @Model.TotalAmount.ToString("C")</p>
+
+<h3>Add-ons</h3>
+<ul>
+    @foreach (var addOn in Model.ReservationAddOns)
+    {
+        <li>@addOn.AddOn?.Name (@addOn.AddOn?.Price.ToString("C"))</li>
+    }
+</ul>
+
+@if ((bool)ViewBag.Print)
+{
+    <script>
+        window.print();
+    </script>
+}
