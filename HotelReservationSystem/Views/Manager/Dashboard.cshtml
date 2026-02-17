@@ -1,0 +1,37 @@
+@model ManagerDashboardViewModel
+@{
+    ViewData["Title"] = "Manager Dashboard";
+}
+
+<h1>Manager Dashboard</h1>
+<div class="stats">
+    <div class="card"><h3>Total Reservations</h3><p>@Model.TotalReservations</p></div>
+    <div class="card"><h3>Daily Bookings</h3><p>@Model.DailyBookings</p></div>
+    <div class="card"><h3>Monthly Bookings</h3><p>@Model.MonthlyBookings</p></div>
+    <div class="card"><h3>Revenue Summary</h3><p>@Model.RevenueSummary.ToString("C")</p></div>
+</div>
+
+<p>
+    <a class="btn" asp-action="Reservations">Manage Reservations</a>
+    <a class="btn" asp-action="ExportToExcel">Export to Excel</a>
+</p>
+
+<h2>Recent Reservations</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th><th>Customer</th><th>Status</th><th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.RecentReservations)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.User?.FullName</td>
+            <td>@item.Status</td>
+            <td>@item.TotalAmount.ToString("C")</td>
+        </tr>
+    }
+    </tbody>
+</table>

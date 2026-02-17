@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "Manager Login";
+}
+
+<h1>Manager Login</h1>
+
+<form asp-action="Login" method="post">
+    <div asp-validation-summary="ModelOnly" class="error"></div>
+
+    <div class="form-row">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required />
+    </div>
+
+    <div class="form-row">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required />
+    </div>
+
+    <button class="btn" type="submit">Sign In</button>
+</form>
