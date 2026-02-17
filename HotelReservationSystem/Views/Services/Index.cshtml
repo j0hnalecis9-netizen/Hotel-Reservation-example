@@ -1,0 +1,18 @@
+@model IEnumerable<AddOn>
+<h2>Add-on and Offers Management</h2>
+<a class="btn btn-primary mb-2" asp-action="Create">Add Add-on</a>
+<table class="table">
+<thead><tr><th>Name</th><th>Price</th><th>Active</th><th>Actions</th></tr></thead>
+<tbody>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.Name</td><td>@item.Price.ToString("C")</td><td>@item.IsActive</td>
+        <td>
+            <a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            <form asp-action="Delete" method="post" class="d-inline"><input type="hidden" name="id" value="@item.Id" /><button class="btn btn-sm btn-danger">Delete</button></form>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
