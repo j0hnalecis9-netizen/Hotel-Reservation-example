@@ -1,0 +1,19 @@
+@model ReceiptViewModel
+@{
+    ViewData["Title"] = "Booking Receipt";
+}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h3>Booking Successful 🎉</h3>
+        <p><strong>Reference #:</strong> @Model.BookingReference</p>
+        <p><strong>Guest:</strong> @Model.GuestName</p>
+        <p><strong>Room:</strong> @Model.Room</p>
+        <p><strong>Dates:</strong> @Model.CheckIn.ToString("yyyy-MM-dd") to @Model.CheckOut.ToString("yyyy-MM-dd") (@Model.Nights nights)</p>
+        <p><strong>Add-ons:</strong> @string.Join(", ", Model.AddOns)</p>
+        <p><strong>Payment:</strong> @Model.PaymentMethod</p>
+        <h4>Total: @Model.Total.ToString("C")</h4>
+        <a class="btn btn-primary" asp-action="DownloadReceiptPdf" asp-route-id="@Model.ReservationId">Download PDF Receipt</a>
+        <button class="btn btn-secondary" onclick="window.print()">Print</button>
+        <p class="text-muted mt-2">Email simulation: receipt is marked as sent in the database.</p>
+    </div>
+</div>

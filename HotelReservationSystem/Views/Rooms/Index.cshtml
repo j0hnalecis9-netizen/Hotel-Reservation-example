@@ -1,0 +1,15 @@
+@model IEnumerable<Room>
+<h2>Room Management</h2>
+<a class="btn btn-primary mb-2" asp-action="Create">Add New Room</a>
+<table class="table">
+<thead><tr><th>Room</th><th>Class</th><th>Price</th><th>Guests</th><th>Available</th><th></th></tr></thead>
+<tbody>
+@foreach (var room in Model)
+{
+    <tr>
+        <td>@room.RoomNumber</td><td>@room.HotelClass?.Name</td><td>@room.PricePerNight.ToString("C")</td><td>@room.MaxGuests</td><td>@room.IsAvailable</td>
+        <td><a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-id="@room.Id">Edit</a></td>
+    </tr>
+}
+</tbody>
+</table>

@@ -1,0 +1,15 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Manager Dashboard";
+}
+<h2>Manager Dashboard</h2>
+<div class="row g-3 mb-4">
+    <div class="col-md-3"><div class="card p-3"><h6>Total Reservations</h6><h3>@Model.TotalReservations</h3></div></div>
+    <div class="col-md-3"><div class="card p-3"><h6>Daily Bookings</h6><h3>@Model.DailyBookings</h3></div></div>
+    <div class="col-md-3"><div class="card p-3"><h6>Monthly Bookings</h6><h3>@Model.MonthlyBookings</h3></div></div>
+    <div class="col-md-3"><div class="card p-3"><h6>Total Revenue</h6><h3>@Model.TotalRevenue.ToString("C")</h3></div></div>
+</div>
+<a class="btn btn-primary" asp-action="Reservations">Manage Reservations</a>
+<a class="btn btn-outline-primary" asp-controller="Rooms" asp-action="Index">Manage Rooms</a>
+<a class="btn btn-outline-primary" asp-controller="Services" asp-action="Index">Manage Add-ons</a>
+<a class="btn btn-success" asp-action="ExportBookingsExcel">Export to Excel</a>

@@ -1,0 +1,8 @@
+@model AddOn
+<h2>Add Add-on</h2>
+<form method="post" class="row g-2">
+<div class="col-md-6"><label asp-for="Name"></label><input asp-for="Name" class="form-control" /></div>
+<div class="col-md-3"><label asp-for="Price"></label><input asp-for="Price" class="form-control" /></div>
+<div class="col-md-3 form-check mt-4"><input asp-for="IsActive" class="form-check-input" /> <label asp-for="IsActive" class="form-check-label"></label></div>
+<div class="col-12"><button class="btn btn-success">Save</button></div>
+</form>

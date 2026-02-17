@@ -1,0 +1,33 @@
+@model ReservationCreateViewModel
+@{
+    ViewData["Title"] = "Create Reservation";
+}
+<h2>Create Reservation</h2>
+<form asp-action="Create" method="post" class="row g-3">
+    <input asp-for="RoomId" type="hidden" />
+    <div class="col-12">
+        <label class="form-label">Room</label>
+        <input class="form-control" value="@Model.RoomDisplay" readonly />
+    </div>
+    <div class="col-md-6"><label asp-for="CheckInDate" class="form-label"></label><input asp-for="CheckInDate" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="CheckOutDate" class="form-label"></label><input asp-for="CheckOutDate" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="NumberOfGuests" class="form-label"></label><input asp-for="NumberOfGuests" class="form-control" /></div>
+    <div class="col-md-6">
+        <label asp-for="PaymentMethod" class="form-label">Payment Method</label>
+        <select asp-for="PaymentMethod" asp-items="Html.GetEnumSelectList<PaymentMethod>()" class="form-select"></select>
+    </div>
+    <div class="col-12">
+        <label class="form-label">Add-ons</label>
+        @foreach (var addOn in Model.AddOns)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="SelectedAddOnIds" value="@addOn.Id" id="addon_@addOn.Id" />
+                <label class="form-check-label" for="addon_@addOn.Id">@addOn.Name (@addOn.Price.ToString("C"))</label>
+            </div>
+        }
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">Confirm Booking</button>
+    </div>
+</form>
+<div asp-validation-summary="All" class="text-danger mt-3"></div>

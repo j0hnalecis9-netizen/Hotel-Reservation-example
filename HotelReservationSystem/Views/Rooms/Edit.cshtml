@@ -1,0 +1,10 @@
+@model Room
+<h2>Add Room</h2>
+<form method="post" class="row g-2">
+    <div class="col-md-6"><label asp-for="RoomNumber"></label><input asp-for="RoomNumber" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="HotelClassId">Hotel Class</label><select asp-for="HotelClassId" asp-items="ViewBag.HotelClassId" class="form-select"></select></div>
+    <div class="col-md-4"><label asp-for="PricePerNight"></label><input asp-for="PricePerNight" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="MaxGuests"></label><input asp-for="MaxGuests" class="form-control" /></div>
+    <div class="col-md-4 form-check mt-4"><input asp-for="IsAvailable" class="form-check-input" /> <label asp-for="IsAvailable" class="form-check-label"></label></div>
+    <div class="col-12"><button class="btn btn-success">Save</button></div>
+</form>
